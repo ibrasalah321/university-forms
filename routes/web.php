@@ -5,6 +5,12 @@ use App\Http\Controllers\Admin\FormController;
 use App\Http\Controllers\Admin\SubmissionController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Student\StudentFormController;
+
+
+Route::get('/', function () {
+    return redirect()->route('login');
+});
 
 // مسارات الضيوف (تسجيل الدخول)
 Route::middleware(['guest'])->group(function () {
@@ -35,7 +41,6 @@ Route::middleware(['auth'])->group(function () {
     ->name('forms.submissions.file');
 });
 
-use App\Http\Controllers\Student\StudentFormController;
 
 // مسارات بوابة الطلاب العامة (بدون تسجيل دخول)
 Route::prefix('s')->group(function () {
