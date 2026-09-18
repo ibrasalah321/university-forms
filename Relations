@@ -1,0 +1,72 @@
+                 USERS
++-----------------------------+
+| id                          |
+| name                        |
+| email                       |
+| password                    |
++-------------+---------------+
+              |
+              | created_by
+              |
+              ▼
+                 FORMS
++-----------------------------+
+| id                          |
+| uuid                        |
+| title                       |
+| description                 |
+| status                      |
+| created_by                  |
++-------------+---------------+
+              |
+     ┌────────┴─────────┐
+     │                  │
+     ▼                  ▼
+FORM_FIELDS        SUBMISSIONS
+     │                  │
+     │                  │
+     └──────┐      ┌────┘
+            ▼      ▼
+       SUBMISSION_VALUES
+
+
+User (1)
+   │
+   │ hasMany
+   ▼
+Form (N)
+   │
+   ├───────────────┐
+   │               │
+   │ hasMany       │ hasMany
+   ▼               ▼
+FormField (N)   Submission (N)
+                    │
+                    │ hasMany
+                    ▼
+             SubmissionValue (N)
+                    ▲
+                    │ belongsTo
+                    │
+               FormField
+
+
+ADMIN
+  ↓
+(Form Builder UI)
+  ↓
+forms + form_fields
+  ↓
+DATABASE = Schema
+
+STUDENT
+  ↓
+FormLoader (UUID)
+  ↓
+Blade Renderer (dynamic)
+  ↓
+User Input
+  ↓
+Submission Engine
+  ↓
+submission_values
